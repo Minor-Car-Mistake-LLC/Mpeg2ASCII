@@ -38,7 +38,7 @@ else:
     os.mkdir("mcm_frames")
     os.mkdir("heatsch")
     os.system(f'ffmpeg -i "{video}" "mcm_frames/test-%03d.jpg"')
-    
+
     cam = cv2.VideoCapture(video)
     fps = int(cam.get(cv2.CAP_PROP_FPS))
     height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -50,9 +50,9 @@ else:
 
     for file in lst:
         print(file)
-        img = cv2.imread("mcm_frames/" + file, cv2.IMREAD_GRAYSCALE)
-        img //= 4
-        img_list = img.tolist()
+        img = cv2.imread("mcm_frames/" + file, cv2.IMREAD_GRAYSCALE) # The image pixels have range [0, 255]
+        img //= 4  # Now the pixels have range [0, 1]
+        img_list = img.tolist() # We have a list of lists of pixels
         result = ""
         asciis = list("""$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|)1}]?-_+~>i!lI;:,"^`'.""")
         h = ""
@@ -73,7 +73,7 @@ else:
         img.save("heatsch/" + str(g) + ".png", "png")
         g += 1
 
-    os.system(f"ffmpeg -i {video} mcm_frames/audio.mp3")
+    os.system(f"ffmpeg -i '{video}' mcm_frames/audio.mp3")
     os.system(f'ffmpeg -framerate {fps} -i heatsch/%d.png -i mcm_frames/audio.mp3 -start_number 0 -r {fps} ascii.mp4"')
     os.remove("mcm_frames")
     os.remove("heatsch")
