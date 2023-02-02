@@ -3,6 +3,7 @@ import os
 from PIL import Image
 from PIL import ImageDraw
 import re
+import time
 
 def sorted_alphanumeric(data):
     convert = lambda text: int(text) if text.isdigit() else text.lower()
@@ -73,7 +74,8 @@ else:
         img.save("heatsch/" + str(g) + ".png", "png")
         g += 1
 
-    os.system(f"ffmpeg -i '{video}' mcm_frames/audio.mp3")
+    os.system(f'ffmpeg -i "{video}" mcm_frames/audio.mp3')
+    time.sleep(1)
     os.system(f'ffmpeg -framerate {fps} -i heatsch/%d.png -i mcm_frames/audio.mp3 -start_number 0 -r {fps} ascii.mp4"')
     os.remove("mcm_frames")
     os.remove("heatsch")
