@@ -50,9 +50,9 @@ else:
 
     for file in lst:
         print(file)
-        img = cv2.imread("mcm_frames/" + file, cv2.IMREAD_GRAYSCALE) # The image pixels have range [0, 255]
-        img //= 4  # Now the pixels have range [0, 1]
-        img_list = img.tolist() # We have a list of lists of pixels
+        img = cv2.imread("mcm_frames/" + file, cv2.IMREAD_GRAYSCALE)
+        img //= 4
+        img_list = img.tolist()
         result = ""
         asciis = list("""$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|)1}]?-_+~>i!lI;:,"^`'.""")
         h = ""
