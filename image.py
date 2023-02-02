@@ -37,7 +37,7 @@ if "png" in video or "jpg" in video:
 else:
     os.mkdir("mcm_frames")
     os.mkdir("heatsch")
-    os.system(f'ffmpeg -i "{video}" -vf scale=32:-1 "mcm_frames/test-%03d.jpg"')
+    os.system(f'ffmpeg -i "{video}" "mcm_frames/test-%03d.jpg"')
     
     cam = cv2.VideoCapture(video)
     fps = int(cam.get(cv2.CAP_PROP_FPS))
